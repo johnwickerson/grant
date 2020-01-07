@@ -79,10 +79,13 @@
   \endgroup%
 }
 
+\def\@subtitle{}
 \def\subtitle#1{\gdef\@subtitle{#1}}
 
 \renewcommand\maketitle{%
-\twocolumn[\centerline{\bf\Large \@title}\ifx\@subtitle\empty\else \medskip\centerline{\it\Large \@subtitle}\fi\bigskip]
+\twocolumn[\centerline{\bf\Large \@title}%
+\ifx\@subtitle\empty\else \medskip\centerline{\it\Large \@subtitle}\fi
+\bigskip]
 }
   
 \endinput
