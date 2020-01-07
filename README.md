@@ -10,6 +10,7 @@ Example usage:
     \bibliography{/path/to/bibfile}
 
     \title{Title of project}
+    \subtitle{Optional subtitle here}
 
     \begin{document}
     
