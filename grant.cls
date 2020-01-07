@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{grant}[2018/09/18 Class for writing grant applications]
-\LoadClass[11pt]{article}
+\LoadClass[11pt, twocolumn]{article}
 
 \newif\if@tinybib\@tinybibfalse
 \DeclareOption{tinybib}{\@tinybibtrue}
@@ -15,7 +15,8 @@
 \RequirePackage{url}
 \RequirePackage{xcolor}
 \RequirePackage{booktabs}
-\RequirePackage{multicol}
+%\RequirePackage{multicol}
+\RequirePackage{caption}
 
 \RequirePackage{soul} % strikeout and underlining
 \setuldepth{a}
@@ -32,15 +33,16 @@
 
 \RequirePackage{enumitem}
 \setitemize{itemsep=0em, leftmargin=*, topsep=0em}
+\setenumerate{itemsep=0em, leftmargin=*, topsep=0em, parsep=0em}
 
 \RequirePackage{helvet}
 \renewcommand\familydefault{\sfdefault}
 
-\RequirePackage[maxnames=3, sortcites]{biblatex}
+\RequirePackage[maxnames=6, sortcites, style=numeric-comp, backend=bibtex]{biblatex}
 \if@tinybib
   \AtBeginBibliography{\tiny}
 \else
-  \AtBeginBibliography{\small}
+  \AtBeginBibliography{\footnotesize}
 \fi
 
 \setlength\bibitemsep{0pt}
@@ -59,8 +61,28 @@
 \titleformat*{\paragraph}{\normalsize\bfseries\itshape\color{green!40!black}}
 \titleformat*{\subparagraph}{\normalsize\itshape\color{green!40!black}}
 
-\renewcommand\title[1]{{\hfill\bf\Large #1\hfill}}
-
 \newcommand\WP[1]{\textbf{WP#1}}
 
+% Reduce spacing above/below figures {
+\setlength{\floatsep}{16pt plus 4pt minus 2pt}
+\setlength{\textfloatsep}{16pt plus 4pt minus 3pt}
+% }
+
+\newenvironment{Figure}{%
+  \begingroup
+    \OuterFrameSep=0em
+    \begin{figure}%
+      \begin{framed}%
+}{%
+      \end{framed}%
+    \end{figure}%
+  \endgroup%
+}
+
+\def\subtitle#1{\gdef\@subtitle{#1}}
+
+\renewcommand\maketitle{%
+\twocolumn[\centerline{\bf\Large \@title}\ifx\@subtitle\empty\else \medskip\centerline{\it\Large \@subtitle}\fi\bigskip]
+}
+  
 \endinput
