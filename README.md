@@ -8,12 +8,10 @@ Example usage:
     \usepackage{pdfpages}
     
     \bibliography{/path/to/bibfile}
-    
-    \begin{document}
-    
+
     \title{Title of project}
-    
-    \begin{multicols}{2}
+
+    \begin{document}
     
     \begin{abstract}
     Blah blah.
@@ -31,21 +29,21 @@ Example usage:
     
     The project will be divided into two work-packages.
     
-    \paragraph{\WP1---}
+    \subsubsection*{\WP1---}
     
     Blah blah.
     
-    \subparagraph{Deliverable:} blah.
+    \paragraph{Deliverable:} blah.
     
-    \subparagraph{Risks:} blah.
+    \paragraph{Risks:} blah.
     
-    \paragraph{\WP2---}
+    \subsubsection*{\WP2---}
     
     Blah blah.
     
-    \subparagraph{Deliverable:} blah.
+    \paragraph{Deliverable:} blah.
     
-    \subparagraph{Risks:} blah.
+    \paragraph{Risks:} blah.
     
     \section{Track record}
     
@@ -54,8 +52,6 @@ Example usage:
     \clearpage
     
     \printbibliography
-    
-    \end{multicols}
     
     \includepdf[pages={-}]{support_letter.pdf}
     
