@@ -1,19 +1,34 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{grant}[2018/09/18 Class for writing grant applications]
-\LoadClass[11pt, twocolumn]{article}
+
+\newif\if@biggermargins\@biggermarginsfalse
+\DeclareOption{biggermargins}{\@biggermarginstrue}
+
+\newif\if@onecolumn\@onecolumnfalse
+\DeclareOption{onecolumn}{\@onecolumntrue}
 
 \newif\if@tinybib\@tinybibfalse
 \DeclareOption{tinybib}{\@tinybibtrue}
+
+\newif\if@normalbib\@normalbibfalse
+\DeclareOption{normalbib}{\@normalbibtrue}
 
 \newif\if@supercite\@supercitefalse
 \DeclareOption{supercite}{\@supercitetrue}
 
 \ProcessOptions\relax
 
-\RequirePackage[margin=20mm]{geometry}
+\LoadClass[11pt]{article}
+
+\if@biggermargins
+  \RequirePackage[margin=1in]{geometry}
+\else
+  \RequirePackage[margin=20mm]{geometry}
+\fi
+
 \RequirePackage[T1]{fontenc}
 \RequirePackage{url}
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 \RequirePackage{booktabs}
 %\RequirePackage{multicol}
 \RequirePackage{caption}
@@ -42,7 +57,11 @@
 \if@tinybib
   \AtBeginBibliography{\tiny}
 \else
-  \AtBeginBibliography{\footnotesize}
+  \if@normalbib
+    \AtBeginBibliography{\normalsize}
+  \else
+    \AtBeginBibliography{\footnotesize}
+  \fi  
 \fi
 
 \setlength\bibitemsep{0pt}
@@ -82,10 +101,18 @@
 \def\@subtitle{}
 \def\subtitle#1{\gdef\@subtitle{#1}}
 
-\renewcommand\maketitle{%
-\twocolumn[\centerline{\bf\Large \@title}%
+\newcommand\titleblock{
+\centerline{\bf\Large \@title}%
 \ifx\@subtitle\empty\else \medskip\centerline{\it\Large \@subtitle}\fi
-\bigskip]
-}
+\bigskip}
+
+\renewcommand\maketitle{%
+\if@onecolumn
+  \titleblock
+\else
+  \twocolumn[\titleblock]
+\fi}
+
+\newcommand\keywords[1]{\noindent\textbf{Keywords:~}#1}
   
 \endinput
